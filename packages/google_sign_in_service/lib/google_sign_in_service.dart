@@ -5,9 +5,10 @@ import 'package:firebase_auth_service/firebase_auth_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInService {
+  final _googleSignIn = GoogleSignIn();
+
   Future<User> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn();
-    final googleUser = await googleSignIn.signIn();
+    final googleUser = await _googleSignIn.signIn();
 
     if (googleUser != null) {
       final GoogleSignInAuthentication googleAuth =
@@ -34,5 +35,9 @@ class GoogleSignInService {
         message: 'Sign in aborted by user',
       );
     }
+  }
+
+  Future<void> signOut() async {
+    return await _googleSignIn.signOut();
   }
 }
