@@ -5,7 +5,7 @@ import 'package:firebase_auth_service/firebase_auth_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInService {
-  Future<AppUser> signInWithGoogle() async {
+  Future<User> signInWithGoogle() async {
     final googleSignIn = GoogleSignIn();
     final googleUser = await googleSignIn.signIn();
 
@@ -19,7 +19,7 @@ class GoogleSignInService {
           // Note: Access token is null when running on web, so we don't check for it above
           accessToken: googleAuth.accessToken,
         ));
-        return AppUser.fromFirebaseUser(userCredential.user);
+        return userCredential.user;
       } else {
         throw FirebaseException(
           plugin: runtimeType.toString(),
